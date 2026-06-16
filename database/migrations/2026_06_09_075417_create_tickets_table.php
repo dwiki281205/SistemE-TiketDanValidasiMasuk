@@ -20,7 +20,7 @@ return new class extends Migration
         $table->string('seat_number')->nullable();
         $table->string('ticket_code')->unique();
         $table->text('qr_code_data')->nullable();
-        $table->timestamp('purchase_date')->useCurrent();
+        $table->timestamps();
         $table->string('payment_method')->nullable();
         $table->enum('payment_status', ['pending','paid','refunded'])->default('pending');
         $table->boolean('is_used')->default(false);
