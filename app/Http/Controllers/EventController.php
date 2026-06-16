@@ -53,4 +53,12 @@ public function update(Request $request, $id)
 
     return redirect('/events');
 }
+
+public function destroy($id)
+{
+    $event = EticketEvent::findOrFail($id);
+    $event->delete();
+
+    return redirect('/events');
+}
 }
