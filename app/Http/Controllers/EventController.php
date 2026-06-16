@@ -31,4 +31,26 @@ public function store(Request $request)
 
     return redirect('/events');
 }
+
+public function edit($id)
+{
+    $event = EticketEvent::findOrFail($id);
+
+    return view('events.edit', compact('event'));
+}
+
+public function update(Request $request, $id)
+{
+    $event = EticketEvent::findOrFail($id);
+
+    $event->update([
+        'title' => $request->title,
+        'venue' => $request->venue,
+        'event_date' => $request->event_date,
+        'total_seats' => $request->total_seats,
+        'price' => $request->price,
+    ]);
+
+    return redirect('/events');
+}
 }

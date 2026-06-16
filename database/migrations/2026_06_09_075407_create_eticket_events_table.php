@@ -25,7 +25,7 @@ return new class extends Migration
         $table->string('contact')->nullable();
         $table->string('poster')->nullable();
         $table->enum('status', ['open','sold_out','done','cancelled'])->default('open');
-        $table->timestamp('created_at')->useCurrent();
+        $table->timestamps();
     });
 }
 
