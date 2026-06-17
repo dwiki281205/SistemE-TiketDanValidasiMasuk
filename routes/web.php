@@ -26,3 +26,6 @@ Route::get('/events/{id}/buy', [TicketController::class, 'create']);
 Route::post('/tickets', [TicketController::class, 'store']);
 
 Route::get('/tickets/{id}', [TicketController::class, 'show']);
+
+Route::get('/check-ticket', [TicketController::class, 'checkForm']);
+Route::post('/check-ticket', [TicketController::class, 'check']);

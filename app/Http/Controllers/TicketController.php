@@ -43,4 +43,30 @@ public function show($id)
 
     return view('tickets.show', compact('ticket'));
 }
+
+public function checkForm()
+{
+    return view('tickets.check');
+}
+
+public function check(Request $request)
+{
+    $ticket = Ticket::where('ticket_code', $request->ticket_code)->first();
+
+    if (!$ticket) {
+        return back()->with('error', 'Tiket tidak ditemukan');
+    }
+
+    if ($ticket->is_used) {
+        return back()->with('error', 'Tiket sudah digunakan');
+    }
+
+    // 🔥 tandai sudah dipakai
+    $ticket->update([
+        'is_used' => 1,
+        'used_at' => now()
+    ]);
+
+    return back()->with('success', 'Tiket valid! Silakan masuk');
+}
 }
