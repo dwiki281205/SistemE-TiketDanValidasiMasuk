@@ -10,7 +10,7 @@
 
 <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container">
-        <a href="/events" class="navbar-brand">E-Ticket</a>
+        <a href="/events" class="navbar-brand">E-Ticket</a> <a href="/dashboard" class="btn btn-info">Dashboard</a>
         <a href="/check-ticket" class="btn btn-warning">Cek Tiket</a>
     </div>
 </nav>
