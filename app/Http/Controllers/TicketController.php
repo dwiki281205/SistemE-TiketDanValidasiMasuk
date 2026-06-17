@@ -17,12 +17,17 @@ class TicketController extends Controller
 
 public function store(Request $request)
 {
+    $lastTicket = Ticket::latest()->first();
+    $number = $lastTicket ? $lastTicket->id + 1 : 1;
+
+    $ticketCode = 'TKT-' . date('Ymd') . '-' . str_pad($number, 4, '0', STR_PAD_LEFT);
+
     $ticket = Ticket::create([
         'event_id' => $request->event_id,
         'buyer_name' => $request->buyer_name,
         'email' => $request->email,
         'phone' => $request->phone,
-        'ticket_code' => uniqid('TKT-'),
+        'ticket_code' => $ticketCode,
     ]);
 
     return redirect('/tickets/' . $ticket->id);
