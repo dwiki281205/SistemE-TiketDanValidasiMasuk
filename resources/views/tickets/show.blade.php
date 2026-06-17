@@ -12,6 +12,9 @@
 <hr>
 
 <p><strong>Kode Tiket:</strong> {{ $ticket->ticket_code }}</p>
+<p><strong>QR Code:</strong></p>
+
+{!! $ticket->qr_code_data !!}
 
 <br>
 
