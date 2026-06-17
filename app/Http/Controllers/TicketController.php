@@ -17,14 +17,21 @@ class TicketController extends Controller
 
 public function store(Request $request)
 {
-    Ticket::create([
+    $ticket = Ticket::create([
         'event_id' => $request->event_id,
         'buyer_name' => $request->buyer_name,
         'email' => $request->email,
         'phone' => $request->phone,
-        'ticket_code' => uniqid('TKT-'), // sementara
+        'ticket_code' => uniqid('TKT-'),
     ]);
 
-    return redirect('/events');
+    return redirect('/tickets/' . $ticket->id);
+}
+
+public function show($id)
+{
+    $ticket = Ticket::with('event')->findOrFail($id);
+
+    return view('tickets.show', compact('ticket'));
 }
 }

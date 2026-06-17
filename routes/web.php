@@ -24,3 +24,5 @@ Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
 Route::get('/events/{id}/buy', [TicketController::class, 'create']);
 Route::post('/tickets', [TicketController::class, 'store']);
+
+Route::get('/tickets/{id}', [TicketController::class, 'show']);
