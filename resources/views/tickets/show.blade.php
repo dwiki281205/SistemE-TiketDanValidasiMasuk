@@ -1,21 +1,31 @@
-<h1>Tiket Berhasil Dibeli 🎉</h1>
+@extends('layouts.app')
 
-<p><strong>Nama:</strong> {{ $ticket->buyer_name }}</p>
-<p><strong>Email:</strong> {{ $ticket->email }}</p>
-<p><strong>No HP:</strong> {{ $ticket->phone }}</p>
+@section('content')
 
-<hr>
+<div class="card text-center">
+    <div class="card-body">
+        <h3 class="text-success">🎉 Tiket Berhasil Dibeli</h3>
 
-<p><strong>Event:</strong> {{ $ticket->event->title }}</p>
-<p><strong>Tempat:</strong> {{ $ticket->event->venue }}</p>
+        <p><strong>{{ $ticket->buyer_name }}</strong></p>
+        <p>{{ $ticket->email }}</p>
 
-<hr>
+        <hr>
 
-<p><strong>Kode Tiket:</strong> {{ $ticket->ticket_code }}</p>
-<p><strong>QR Code:</strong></p>
+        <h5>{{ $ticket->event->title }}</h5>
+        <p>{{ $ticket->event->venue }}</p>
 
-{!! $ticket->qr_code_data !!}
+        <hr>
 
-<br>
+        <h4 class="text-primary">{{ $ticket->ticket_code }}</h4>
 
-<a href="/events">Kembali ke Event</a>
+        <div class="mt-3">
+            {!! $ticket->qr_code_data !!}
+        </div>
+
+        <br>
+
+        <a href="/events" class="btn btn-dark">Kembali</a>
+    </div>
+</div>
+
+@endsection

@@ -1,15 +1,23 @@
-<h1>Cek Tiket</h1>
+@extends('layouts.app')
+
+@section('content')
+
+<h2>Cek Tiket</h2>
 
 @if(session('success'))
-    <p style="color:green;">{{ session('success') }}</p>
+    <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
 @if(session('error'))
-    <p style="color:red;">{{ session('error') }}</p>
+    <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
 
 <form method="POST" action="/check-ticket">
     @csrf
-    <input type="text" name="ticket_code" placeholder="Masukkan kode tiket">
-    <button type="submit">Cek</button>
+    <div class="mb-3">
+        <input type="text" name="ticket_code" class="form-control" placeholder="Masukkan kode tiket">
+    </div>
+    <button class="btn btn-primary">Cek</button>
 </form>
+
+@endsection
