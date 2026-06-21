@@ -2,45 +2,86 @@
 
 @section('content')
 
-<h2 class="mb-4">Dashboard Admin</h2>
+<div class="hero-banner mb-4">
+    <h2 class="hero-title">
+        🎫 E-Ticket Management
+    </h2>
 
-<div class="row">
+    <p class="hero-subtitle">
+        Kelola event, penjualan tiket, dan validasi peserta
+        dalam satu platform yang mudah digunakan.
+    </p>
+</div>
+
+<div class="row g-4">
 
     <div class="col-md-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h5>Total Event</h5>
-                <h3>{{ $totalEvents }}</h3>
-            </div>
+        <div class="card p-4 stat-card">
+            <h6 class="text-muted">Total Event</h6>
+            <h2 class="fw-bold text-primary">
+                {{ $totalEvents }}
+            </h2>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-body">
-                <h5>Total Tiket</h5>
-                <h3>{{ $totalTickets }}</h3>
-            </div>
+        <div class="card p-4 stat-card">
+            <h6 class="text-muted">Total Tiket</h6>
+            <h2 class="fw-bold text-success">
+                {{ $totalTickets }}
+            </h2>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card text-white bg-warning mb-3">
-            <div class="card-body">
-                <h5>Tiket Digunakan</h5>
-                <h3>{{ $usedTickets }}</h3>
-            </div>
+        <div class="card p-4 stat-card">
+            <h6 class="text-muted">Tiket Digunakan</h6>
+            <h2 class="fw-bold text-warning">
+                {{ $usedTickets }}
+            </h2>
         </div>
     </div>
 
     <div class="col-md-3">
-        <div class="card text-white bg-danger mb-3">
-            <div class="card-body">
-                <h5>Belum Digunakan</h5>
-                <h3>{{ $unusedTickets }}</h3>
-            </div>
+        <div class="card p-4 stat-card">
+            <h6 class="text-muted">Belum Digunakan</h6>
+            <h2 class="fw-bold text-danger">
+                {{ $unusedTickets }}
+            </h2>
         </div>
     </div>
+
+</div>
+
+<div class="card mt-4 p-4">
+
+    <h5 class="fw-bold mb-3">
+        Ringkasan Sistem
+    </h5>
+
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            Total Event Aktif :
+            <strong>{{ $totalEvents }}</strong>
+        </li>
+
+        <li class="list-group-item">
+            Total Tiket Terjual :
+            <strong>{{ $totalTickets }}</strong>
+        </li>
+
+        <li class="list-group-item">
+            Tiket Sudah Digunakan :
+            <strong>{{ $usedTickets }}</strong>
+        </li>
+
+        <li class="list-group-item">
+            Tiket Belum Digunakan :
+            <strong>{{ $unusedTickets }}</strong>
+        </li>
+
+    </ul>
 
 </div>
 
