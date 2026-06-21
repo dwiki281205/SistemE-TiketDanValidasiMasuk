@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
+    <style>
+body{
+    background:#f8fafc;
+}
+
+.card{
+    border-radius:18px;
+    transition:0.25s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.navbar{
+    box-shadow:0 2px 15px rgba(0,0,0,0.1);
+}
+</style>
 <head>
     <title>E-Ticket</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 
