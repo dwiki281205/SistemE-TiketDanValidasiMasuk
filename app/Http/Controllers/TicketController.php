@@ -69,4 +69,13 @@ public function check(Request $request)
 
     return back()->with('success', 'Tiket valid! Silakan masuk');
 }
+
+public function index()
+{
+    $tickets = Ticket::with('event')
+        ->latest()
+        ->get();
+
+    return view('tickets.index', compact('tickets'));
+}
 }

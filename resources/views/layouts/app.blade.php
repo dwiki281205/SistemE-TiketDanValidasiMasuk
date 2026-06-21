@@ -134,16 +134,20 @@
        class="{{ request()->is('dashboard') ? 'active-menu' : '' }}">
         📊 Dashboard
     </a>
+<a href="/events"
+   class="{{ request()->is('events*') ? 'active-menu' : '' }}">
+    🎟 Event
+</a>
 
-    <a href="/events"
-       class="{{ request()->is('events*') ? 'active-menu' : '' }}">
-        🎟 Event
-    </a>
+<a href="/tickets"
+   class="{{ request()->is('tickets*') ? 'active-menu' : '' }}">
+    📄 Riwayat Tiket
+</a>
 
-    <a href="/check-ticket"
-       class="{{ request()->is('check-ticket*') ? 'active-menu' : '' }}">
-        ✅ Validasi Tiket
-    </a>
+<a href="/check-ticket"
+   class="{{ request()->is('check-ticket*') ? 'active-menu' : '' }}">
+    ✅ Validasi Tiket
+</a>
 
 </div>
 
