@@ -28,6 +28,7 @@ public function store(Request $request)
     $ticket = Ticket::create([
         'event_id' => $request->event_id,
         'buyer_name' => $request->buyer_name,
+        'ticket_type' => $request->ticket_type,
         'email' => $request->email,
         'phone' => $request->phone,
         'ticket_code' => $ticketCode,

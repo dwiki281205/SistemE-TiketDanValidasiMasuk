@@ -7,7 +7,13 @@
     <input type="text" name="venue" placeholder="Lokasi"><br><br>
     <input type="date" name="event_date"><br><br>
     <input type="number" name="total_seats" placeholder="Jumlah Kursi"><br><br>
-    <input type="number" name="price" placeholder="Harga"><br><br>
+    <input type="number"
+       name="vip_price"
+       placeholder="Harga VIP"><br><br>
+
+<input type="number"
+       name="regular_price"
+       placeholder="Harga Regular"><br><br>
     <div class="mb-3">
     <label>Poster Event</label>
     <input type="file" name="poster" class="form-control">

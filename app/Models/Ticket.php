@@ -11,6 +11,7 @@ class Ticket extends Model
         'buyer_name',
         'email',
         'phone',
+        'ticket_type',
         'seat_number',
         'ticket_code',
         'qr_code_data',

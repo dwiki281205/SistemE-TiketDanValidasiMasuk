@@ -13,6 +13,8 @@ class EticketEvent extends Model
         'title',
         'description',
         'category',
+        'vip_price',
+        'regular_price',
         'venue',
         'event_date',
         'event_time',

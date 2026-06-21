@@ -33,7 +33,8 @@ public function store(Request $request)
         'venue' => $request->venue,
         'event_date' => $request->event_date,
         'total_seats' => $request->total_seats,
-        'price' => $request->price,
+        'vip_price' => $request->vip_price,
+        'regular_price' => $request->regular_price,
         'poster' => $posterPath,
     ]);
 
@@ -62,14 +63,17 @@ public function update(Request $request, $id)
         $posterPath = $request->file('poster')->store('posters', 'public');
     }
 
-    $event->update([
-        'title' => $request->title,
-        'venue' => $request->venue,
-        'event_date' => $request->event_date,
-        'total_seats' => $request->total_seats,
-        'price' => $request->price,
-        'poster' => $posterPath,
-    ]);
+   $event->update([
+    'title' => $request->title,
+    'venue' => $request->venue,
+    'event_date' => $request->event_date,
+    'total_seats' => $request->total_seats,
+
+    'price' => $request->regular_price,
+
+    'vip_price' => $request->vip_price,
+    'regular_price' => $request->regular_price,
+]);
 
     return redirect('/events');
 }
