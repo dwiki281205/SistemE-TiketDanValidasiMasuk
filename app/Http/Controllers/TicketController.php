@@ -26,6 +26,7 @@ public function store(Request $request)
     $qr = QrCode::size(200)->generate($ticketCode);
 
     $ticket = Ticket::create([
+        'user_id' => auth()->check() ? auth()->id() : null,
         'event_id' => $request->event_id,
         'buyer_name' => $request->buyer_name,
         'ticket_type' => $request->ticket_type,
@@ -73,10 +74,85 @@ public function check(Request $request)
 
 public function index()
 {
-    $tickets = Ticket::with('event')
-        ->latest()
-        ->get();
+    $query = Ticket::with('event');
+
+    if (auth()->user()->role !== 'admin') {
+        $query->where(function ($q) {
+            $q->where('user_id', auth()->id())
+              ->orWhere('email', auth()->user()->email);
+        });
+    }
+
+    $tickets = $query->latest()->get();
 
     return view('tickets.index', compact('tickets'));
 }
+
+public function requestRefund($id)
+{
+    $ticket = Ticket::findOrFail($id);
+
+    $ticket->refund_status = 'pending';
+
+    $ticket->save();
+
+    return back()->with(
+        'success',
+        'Permintaan refund berhasil dikirim'
+    );
 }
+
+public function refunds()
+{
+    $tickets = Ticket::with('event')
+        ->where('refund_status', '!=', 'none')
+        ->latest()
+        ->get();
+
+    return view(
+        'refunds.index',
+        compact('tickets')
+    );
+}
+
+public function approveRefund($id)
+{
+    $ticket = Ticket::findOrFail($id);
+
+    $ticket->refund_status = 'approved';
+    $ticket->payment_status = 'refunded';
+
+    $ticket->save();
+
+    return back()->with('success', 'Permintaan refund berhasil disetujui.');
+}
+
+public function rejectRefund($id)
+{
+    $ticket = Ticket::findOrFail($id);
+
+    $ticket->refund_status = 'rejected';
+
+    $ticket->save();
+
+    return back()->with('success', 'Permintaan refund berhasil ditolak.');
+}
+
+public function myRefunds()
+{
+    $tickets = Ticket::with('event')
+        ->where(function ($query) {
+            $query->where('user_id', auth()->id())
+                  ->orWhere('email', auth()->user()->email);
+        })
+        ->where('refund_status', '!=', 'none')
+        ->latest()
+        ->get();
+
+    return view(
+        'tickets.my_refunds',
+        compact('tickets')
+    );
+}
+}
+

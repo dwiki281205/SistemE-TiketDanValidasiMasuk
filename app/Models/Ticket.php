@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
+        'user_id',
         'event_id',
         'buyer_name',
         'email',
@@ -18,11 +19,17 @@ class Ticket extends Model
         'payment_method',
         'payment_status',
         'is_used',
-        'used_at'
+        'used_at',
+        'refund_status',
     ];
 
     public function event()
     {
         return $this->belongsTo(EticketEvent::class, 'event_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
