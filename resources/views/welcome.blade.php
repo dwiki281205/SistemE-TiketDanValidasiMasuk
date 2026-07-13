@@ -133,11 +133,11 @@
 
     .event-card {
         background: var(--card-bg);
-        border-radius: 20px;
+        border-radius: 28px;
         overflow: hidden;
-        border: 1px solid var(--border-color);
-        box-shadow: var(--card-shadow);
-        transition: var(--transition-fluid);
+        border: none;
+        box-shadow: 0 15px 40px -10px rgba(0,0,0,0.12);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -176,12 +176,12 @@
 <div class="hero-section">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6" data-aos="fade-right">
                 <h1 class="hero-title">Satu Platform untuk Semua Event Kreatif!</h1>
                 <p class="hero-subtitle">Beli tiket konser musik, festival, seminar, dan workshop favoritmu secara instan, aman, dan tanpa repot.</p>
                 <a href="/events" class="btn-primary-custom px-4 py-3 fs-6">Jelajahi Event Sekarang</a>
             </div>
-            <div class="col-lg-5 offset-lg-1 d-none d-lg-block text-center position-relative">
+            <div class="col-lg-5 offset-lg-1 d-none d-lg-block text-center position-relative" data-aos="fade-left" data-aos-delay="200">
                 <div class="position-absolute" style="width: 250px; height: 250px; background: rgba(255, 255, 255, 0.15); filter: blur(60px); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;"></div>
                 <i class="ph-fill ph-ticket hero-ticket-icon"></i>
             </div>
@@ -190,7 +190,7 @@
 </div>
 
 <!-- Search Panel (Traveloka/tiket.com style Mockup) -->
-<div class="container">
+<div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="search-container">
         <form action="/events" method="GET">
             <div class="row g-3 align-items-center">
@@ -235,7 +235,7 @@
 <!-- Features Section -->
 <div class="features-section">
     <div class="container">
-        <div class="row text-center mb-5">
+        <div class="row text-center mb-5" data-aos="fade-up">
             <div class="col-lg-8 mx-auto">
                 <h2 class="fw-bold" style="font-size: 28px;">Mengapa Memilih E-Ticket Plus?</h2>
                 <p class="text-muted">Layanan pemesanan tiket dengan validasi masuk instan dan fitur refund terintegrasi.</p>
@@ -243,21 +243,21 @@
         </div>
         
         <div class="row g-4 justify-content-center mt-3">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="ph-fill ph-lightning"></i></div>
                     <h5 class="fw-bold" style="color: var(--text-dark);">Instant E-Ticket</h5>
                     <p class="mb-0" style="color: var(--text-muted); font-size: 14.5px;">E-Ticket diterbitkan beserta QR Code unik secara langsung sesaat setelah Anda menyelesaikan checkout.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="ph-fill ph-lock-key"></i></div>
                     <h5 class="fw-bold" style="color: var(--text-dark);">Pembayaran Aman</h5>
                     <p class="mb-0" style="color: var(--text-muted); font-size: 14.5px;">Verifikasi status pembayaran secara terpusat untuk menjamin keaslian tiket masuk di lokasi event.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="ph-fill ph-money"></i></div>
                     <h5 class="fw-bold" style="color: var(--text-dark);">Kemudahan Refund</h5>
@@ -271,7 +271,7 @@
 <!-- Event Showcase Section -->
 <div class="showcase-section border-top border-bottom py-5" style="background-color: var(--bg-color); border-color: var(--border-color) !important;">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-4">
+        <div class="d-flex justify-content-between align-items-end mb-4" data-aos="fade-up">
             <div>
                 <h2 class="showcase-title"><i class="ph-fill ph-fire text-danger"></i> Event Terpopuler Minggu Ini</h2>
                 <p class="mb-0" style="color: var(--text-muted);">Segera pesan tiket Anda sebelum kehabisan kursi!</p>
@@ -290,23 +290,26 @@
         @else
             <div class="row g-4">
                 @foreach($events as $event)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                         <div class="event-card">
                             <div class="position-relative">
                                 @if($event->poster)
                                     <img
                                         src="{{ asset('storage/'.$event->poster) }}"
-                                        class="card-img-top"
-                                        style="height: 200px; object-fit: cover;"
+                                        class="w-100"
+                                        style="height: 240px; object-fit: cover;"
                                         alt="Poster {{ $event->title }}"
                                     >
                                 @else
-                                    <div class="bg-primary text-white d-flex flex-column align-items-center justify-content-center" style="height: 200px;">
+                                    <div class="bg-primary text-white d-flex flex-column align-items-center justify-content-center" style="height: 240px;">
                                         <span class="fs-1"><i class="ph-fill ph-ticket"></i></span>
                                         <span class="fw-bold mt-2">E-Ticket Plus</span>
                                     </div>
                                 @endif
-                                <span class="position-absolute top-0 end-0 m-3 badge bg-dark bg-opacity-75 text-white py-2 px-3 fw-bold" style="border-radius: 30px; font-size: 11px;">
+                                <!-- Gradient Overlay -->
+                                <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%); pointer-events: none;"></div>
+                                
+                                <span class="position-absolute bottom-0 start-0 m-3 badge" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 30px; font-size: 11px; font-weight: 700;">
                                     {{ $event->category ?? 'Event' }}
                                 </span>
                             </div>
@@ -316,8 +319,13 @@
                                 <div class="small mb-3 d-flex align-items-center gap-2" style="color: var(--text-muted);">
                                     <i class="ph-fill ph-map-pin fs-6"></i> <span>{{ $event->venue }}</span>
                                 </div>
-                                <div class="small mb-3 d-flex align-items-center gap-2" style="color: var(--text-muted);">
-                                    <i class="ph-fill ph-calendar-blank fs-6"></i> <span>{{ date('d M Y', strtotime($event->event_date)) }}</span>
+                                <div class="small mb-3 d-flex flex-wrap align-items-center gap-2" style="color: var(--text-muted);">
+                                    <div class="d-flex align-items-center gap-2 me-2">
+                                        <i class="ph-fill ph-calendar-blank fs-6"></i> <span>{{ date('d M Y', strtotime($event->event_date)) }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="ph-fill ph-clock fs-6"></i> <span>{{ $event->event_time ?? '08:00 WIB' }}</span>
+                                    </div>
                                 </div>
                                 <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-color) !important;">
                                     <div>
@@ -325,8 +333,7 @@
                                         <span class="text-success fw-bold">Rp {{ number_format($event->regular_price, 0, ',', '.') }}</span>
                                     </div>
                                     <div class="d-flex gap-2">
-                                        <a href="/events/{{ $event->id }}" class="btn-secondary-custom py-2 px-3">Detail</a>
-                                        <a href="/events/{{ $event->id }}/buy" class="btn-primary-custom py-2 px-3">Beli Tiket</a>
+                                        <a href="/events/{{ $event->id }}/buy" class="btn-primary-custom py-2 px-3 w-100 text-center">Beli Tiket</a>
                                     </div>
                                 </div>
                             </div>
@@ -339,7 +346,7 @@
 </div>
 
 <!-- CTA Banner Section -->
-<div class="container mt-5">
+<div class="container mt-5" data-aos="zoom-in-up">
     <div class="cta-section">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-4 mb-lg-0">

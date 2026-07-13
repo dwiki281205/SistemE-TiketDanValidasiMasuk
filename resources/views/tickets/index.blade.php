@@ -2,6 +2,7 @@
 
 @section('content')
 
+<div class="container py-5">
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h2 class="fw-bold mb-1 text-dark"><i class="ph-bold ph-file-text text-primary"></i> Riwayat Pembelian Tiket</h2>
@@ -87,5 +88,6 @@
         </table>
     </div>
 @endif
+</div>
 
 @endsection

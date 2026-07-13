@@ -8,12 +8,12 @@
     </a>
 </div>
 
-<div class="row g-4" style="max-width: 1000px;">
+<div class="row g-4 mx-auto justify-content-center" style="max-width: 1100px;">
     <!-- Form Beli Tiket -->
     <div class="col-md-7">
         <div class="card shadow-sm h-100">
-            <div class="card-header bg-white border-bottom p-4">
-                <h4 class="fw-bold text-dark mb-0">🛒 Checkout Tiket</h4>
+            <div class="card-header border-bottom p-4">
+                <h4 class="fw-bold mb-0">🛒 Checkout Tiket</h4>
                 <small class="text-muted">Isi data pemesan dengan lengkap untuk memproses tiket Anda.</small>
             </div>
             

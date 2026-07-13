@@ -14,6 +14,9 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -75,6 +78,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* Top Navbar styling */
@@ -311,7 +315,7 @@
                         <a class="nav-link-custom {{ request()->is('/') ? 'active' : '' }}" href="/">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link-custom {{ request()->is('events') || request()->is('events/*/buy') ? 'active' : '' }}" href="/events">Cari Event</a>
+                        <a class="nav-link-custom {{ request()->is('events') || request()->is('events/*/buy') ? 'active' : '' }}" href="/events">Daftar Event</a>
                     </li>
                     
                     @auth
@@ -394,7 +398,7 @@
                 <div class="col-md-3 offset-md-1">
                     <h6 class="footer-title">Tautan Cepat</h6>
                     <a href="/" class="footer-link">Beranda</a>
-                    <a href="/events" class="footer-link">Cari Event</a>
+                    <a href="/events" class="footer-link">Daftar Event</a>
                     <a href="/login" class="footer-link">Masuk</a>
                 </div>
                 <div class="col-md-3">
@@ -414,8 +418,21 @@
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <!-- Theme Toggle Script -->
     <script>
+        // Inisialisasi AOS (Animate On Scroll)
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50
+            });
+        }
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         

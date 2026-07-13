@@ -15,7 +15,7 @@ E-Ticket Plus adalah sebuah platform aplikasi web modern end-to-end yang menjemb
 - **Frontend / UI:** Menggunakan kombinasi **Blade Templating**, **Bootstrap 5**, dan **Custom CSS**. 
 - **Desain & Aset:** 
   - Menggunakan **Phosphor Icons** untuk ikon-ikon yang terlihat kekinian.
-  - Mendukung fitur **Dark Mode** (Mode Gelap) penuh yang mengubah variabel warna sistem secara otomatis menggunakan Javascript.
+  - Mendukung fitur **Dark Mode** (Mode Gelap) penuh yang mengubah variabel warna sistem secara otomatis menggVunakan Javascript.
   - Pembuatan QR Code secara dinamis menggunakan *library* Simple QrCode.
 
 ---

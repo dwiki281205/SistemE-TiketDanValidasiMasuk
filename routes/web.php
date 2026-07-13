@@ -13,7 +13,10 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    $events = \App\Models\EticketEvent::latest()->take(3)->get();
+    $events = \App\Models\EticketEvent::withCount('tickets')
+        ->orderBy('tickets_count', 'desc')
+        ->take(3)
+        ->get();
     $categories = \App\Models\EticketEvent::select('category')->distinct()->pluck('category');
     return view('welcome', compact('events', 'categories'));
 });

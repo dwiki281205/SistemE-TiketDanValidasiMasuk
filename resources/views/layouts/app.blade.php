@@ -66,19 +66,6 @@
             --glow-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.5), 0 0 25px rgba(59, 130, 246, 0.4);
         }
 
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --text-color: #f1f5f9;
-            --sidebar-bg: #020617;
-            --sidebar-hover: #1e293b;
-            --topbar-bg: #1e293b;
-            --border-color: #334155;
-            --card-bg: #1e293b;
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-            --glow-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-        }
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
