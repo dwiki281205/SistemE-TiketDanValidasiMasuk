@@ -1,58 +1,53 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎟️ E-Ticket Plus
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+E-Ticket Plus adalah sebuah platform aplikasi web modern end-to-end yang menjembatani penyelenggara acara (promotor/admin) dengan pembeli tiket (customer). Platform ini tidak hanya sekadar menjual tiket, tetapi mengelola seluruh siklus hidup acara: mulai dari publikasi acara, sistem pembayaran terintegrasi berbasis QRIS, hingga validasi tiket fisik di lokasi acara (check-in) menggunakan teknologi QR Code.
 
-## About Laravel
+## 🌟 Masalah yang Diselesaikan
+- Penjualan tiket manual yang rentan pemalsuan (diatasi dengan QR Code unik).
+- Pengecekan mutasi bank yang membingungkan (diatasi dengan fitur Konfirmasi Pembayaran dan unggah bukti transfer).
+- Sulitnya mengelola pengembalian dana (diatasi dengan fitur Request Refund terpusat).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 💻 Teknologi yang Digunakan (Tech Stack)
+- **Backend:** **Laravel** (Framework PHP modern) yang menangani logika sistem, keamanan (middleware), routing, dan koneksi ke database.
+- **Database:** **MySQL** terhubung menggunakan sistem migrasi dan *Eloquent ORM* dari Laravel.
+- **Frontend / UI:** Menggunakan kombinasi **Blade Templating**, **Bootstrap 5**, dan **Custom CSS**. 
+- **Desain & Aset:** 
+  - Menggunakan **Phosphor Icons** untuk ikon-ikon yang terlihat kekinian.
+  - Mendukung fitur **Dark Mode** (Mode Gelap) penuh yang mengubah variabel warna sistem secara otomatis menggunakan Javascript.
+  - Pembuatan QR Code secara dinamis menggunakan *library* Simple QrCode.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚶‍♂️ Alur Pengguna: Customer Journey (Sisi Pembeli)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Eksplorasi (Homepage):** Pembeli datang ke halaman utama. Mereka disambut dengan UI yang estetik, animasi tiket melayang, dan bisa menggunakan **Fitur Pencarian Pintar** (berdasarkan Nama, Lokasi, dan Kategori event).
+2. **Checkout (Beli Tiket):** Pembeli memilih tiket (Regular/VIP), mengisi nama, email, dan nomor HP.
+3. **Sistem Pembayaran QRIS:** Pembeli diwajibkan memindai *barcode* QRIS yang disediakan dan **mengunggah foto bukti pembayaran** (struk/screenshot m-banking).
+4. **Menerima Tiket (Status Pending):** Sistem menerbitkan E-Ticket, namun QR Code disembunyikan dan dilabeli **"Menunggu Konfirmasi Pembayaran"**. Ini mencegah pembeli memanipulasi tiket sebelum uang benar-benar masuk.
+5. **Tiket Aktif:** Setelah admin mengonfirmasi uang masuk, E-Ticket otomatis aktif dan menampilkan gambar QR Code unik yang siap dibawa ke lokasi konser/seminar.
+6. **Klaim Refund (Opsional):** Jika pembeli batal hadir, tersedia tombol "Ajukan Refund". Jika disetujui, tiket mereka otomatis di-cap **VOID / REFUNDED** dan tidak bisa digunakan.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🛠️ Alur Manajemen: Admin Journey (Sisi Penyelenggara)
 
-## Agentic Development
+1. **Dashboard & Analytics:** Admin dapat melihat metrik cepat (tiket terjual, pendapatan, tugas pending).
+2. **Kelola Event (CRUD):** Admin bisa menambah acara baru, mengatur tanggal, menentukan harga tiket (VIP/Regular), kuota kursi, memasukkan kategori, hingga mengunggah poster acara.
+3. **Konfirmasi Pembayaran:** Terdapat halaman khusus (menu ikon dompet). Admin memeriksa foto bukti transfer pembeli. Hanya dengan satu tombol **"Konfirmasi"**, tiket pembeli yang tadinya *pending* langsung aktif.
+4. **Validasi Tiket (Di Hari-H Acara):** Petugas pintu masuk menggunakan menu **Validasi Tiket**. Mereka bisa meng-scan QR Code pembeli, dan sistem akan menjawab apakah tiket itu **Valid**, **Sudah Digunakan** (mencegah tiket fotokopian ganda masuk), atau **Tidak Ditemukan**.
+5. **Kelola Refund:** Admin menyaring dan menyetujui permintaan refund pembeli secara sistematis (Approve/Reject).
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## ✨ Fitur Unggulan
 
-php artisan boost:install
-```
+**1. Smart Dark Mode (Tema Gelap Cerdas)**
+Sistem tidak hanya mengubah warna latar, tetapi juga menyesuaikan warna tabel, *border*, *glow effect*, hingga komponen bawaan Bootstrap agar tetap elegan tanpa merusak visibilitas teks.
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**2. Sistem Keamanan "Anti-Bocor" Tiket**
+Kami mendesain agar QR Code berharga tersebut disandera (disembunyikan) oleh sistem dan diberi watermark *Pending* sampai uang benar-benar masuk. Ini menjamin 0% celah bagi tiket palsu.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**3. UI/UX Sekelas Aplikasi Skala Besar**
+Desain tidak menggunakan templat kaku. Kami menggunakan *glassmorphism*, bayangan bercahaya (*glow shadows*), transisi halus pada *hover* kartu, *pill-badges* untuk status tiket (Pending/Paid/Void), dan bentuk desain tiket fisik realistis dengan gerigi (cutout) pada halaman e-ticket.
