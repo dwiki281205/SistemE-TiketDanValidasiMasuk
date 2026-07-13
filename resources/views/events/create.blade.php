@@ -19,9 +19,13 @@
             @csrf
 
             <div class="row">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="title" class="form-label">Nama Event</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder="Contoh: Konser Musik Jakarta 2026" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="category" class="form-label">Kategori Event</label>
+                    <input type="text" name="category" id="category" class="form-control" placeholder="Contoh: Konser Musik, Seminar, Olahraga" required>
                 </div>
             </div>
 

@@ -4,21 +4,21 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-1">📄 Riwayat Pembelian Tiket</h2>
+        <h2 class="fw-bold mb-1 text-dark"><i class="ph-bold ph-file-text text-primary"></i> Riwayat Pembelian Tiket</h2>
         <p class="text-muted mb-0">Daftar lengkap transaksi pembelian tiket seluruh event.</p>
     </div>
 </div>
 
 @if($tickets->isEmpty())
-    <div class="card p-5 text-center border-0 shadow-sm">
+    <div class="card p-5 text-center border-0 shadow-sm" style="background-color: var(--card-bg);">
         <div class="card-body empty-state">
-            <div class="empty-state-icon">📄</div>
-            <h5 class="fw-bold text-dark">Belum Ada Pembelian Tiket</h5>
+            <div class="empty-state-icon text-primary"><i class="ph-fill ph-file-text" style="font-size: 48px;"></i></div>
+            <h5 class="fw-bold text-dark mt-3">Belum Ada Pembelian Tiket</h5>
             <p class="text-muted">Semua tiket yang dibeli oleh pelanggan akan muncul di sini.</p>
         </div>
     </div>
 @else
-    <div class="table-custom-wrapper shadow-sm">
+    <div class="table-responsive table-custom-wrapper shadow-sm">
         <table class="table table-custom table-hover">
             <thead>
                 <tr>
@@ -49,9 +49,9 @@
                         </td>
                         <td>
                             @if($ticket->ticket_type == 'VIP')
-                                <span class="badge bg-warning text-dark fw-bold" style="font-size: 11px;">⭐ VIP</span>
+                                <span class="badge bg-warning text-dark fw-bold" style="font-size: 11px;"><i class="ph-fill ph-star"></i> VIP</span>
                             @else
-                                <span class="badge bg-primary text-white fw-bold" style="font-size: 11px;">🎫 Regular</span>
+                                <span class="badge bg-primary text-white fw-bold" style="font-size: 11px;"><i class="ph-fill ph-ticket"></i> Regular</span>
                             @endif
                         </td>
                         <td>

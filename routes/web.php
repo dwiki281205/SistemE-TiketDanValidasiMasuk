@@ -14,7 +14,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     $events = \App\Models\EticketEvent::latest()->take(3)->get();
-    return view('welcome', compact('events'));
+    $categories = \App\Models\EticketEvent::select('category')->distinct()->pluck('category');
+    return view('welcome', compact('events', 'categories'));
 });
 
 // Beli Tiket (Public)

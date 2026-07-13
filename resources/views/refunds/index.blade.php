@@ -4,21 +4,21 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-1">💰 Kelola Pengajuan Refund</h2>
+        <h2 class="fw-bold mb-1 text-dark"><i class="ph-bold ph-money text-primary"></i> Kelola Pengajuan Refund</h2>
         <p class="text-muted mb-0">Tinjau, setujui, atau tolak permohonan pengembalian dana tiket dari pembeli.</p>
     </div>
 </div>
 
 @if($tickets->isEmpty())
-    <div class="card p-5 text-center border-0 shadow-sm">
+    <div class="card p-5 text-center border-0 shadow-sm" style="background-color: var(--card-bg);">
         <div class="card-body empty-state">
-            <div class="empty-state-icon">💸</div>
-            <h5 class="fw-bold text-dark">Tidak Ada Pengajuan Refund</h5>
+            <div class="empty-state-icon text-primary"><i class="ph-fill ph-money" style="font-size: 48px;"></i></div>
+            <h5 class="fw-bold text-dark mt-3">Tidak Ada Pengajuan Refund</h5>
             <p class="text-muted">Semua permohonan refund dari pembeli akan muncul di sini.</p>
         </div>
     </div>
 @else
-    <div class="table-custom-wrapper shadow-sm">
+    <div class="table-responsive table-custom-wrapper shadow-sm">
         <table class="table table-custom table-hover">
             <thead>
                 <tr>
@@ -36,7 +36,7 @@
                         <td class="fw-bold text-primary">
                             {{ $ticket->ticket_code }}
                         </td>
-                        <td class="fw-semibold text-dark">
+                        <td class="fw-semibold">
                             {{ $ticket->buyer_name }}
                         </td>
                         <td>
@@ -44,23 +44,23 @@
                         </td>
                         <td>
                             @if($ticket->ticket_type == 'VIP')
-                                <span class="badge bg-warning text-dark fw-bold">⭐ VIP</span>
+                                <span class="badge bg-warning text-dark fw-bold"><i class="ph-fill ph-star"></i> VIP</span>
                             @else
-                                <span class="badge bg-primary text-white fw-bold">🎫 Regular</span>
+                                <span class="badge bg-primary text-white fw-bold"><i class="ph-fill ph-ticket"></i> Regular</span>
                             @endif
                         </td>
                         <td>
                             @if($ticket->refund_status == 'pending')
                                 <span class="badge-pill-custom status-pending">
-                                    <span>⏳</span> Pending
+                                    <i class="ph-bold ph-hourglass"></i> Pending
                                 </span>
                             @elseif($ticket->refund_status == 'approved')
                                 <span class="badge-pill-custom status-approved">
-                                    <span>✔</span> Approved
+                                    <i class="ph-bold ph-check"></i> Approved
                                 </span>
                             @elseif($ticket->refund_status == 'rejected')
                                 <span class="badge-pill-custom status-rejected">
-                                    <span>✖</span> Rejected
+                                    <i class="ph-bold ph-x"></i> Rejected
                                 </span>
                             @endif
                         </td>

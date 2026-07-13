@@ -14,28 +14,75 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <!-- Custom Premium Stylesheet -->
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #d946ef 100%);
-            --info-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --secondary-gradient: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            --info-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
             --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
             --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             --danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --primary-dark: #1e3a8a;
+
             --bg-color: #f8fafc;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-            --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --text-color: #0f172a;
+            --sidebar-bg: #ffffff;
+            --sidebar-hover: #f1f5f9;
+            --sidebar-text: #475569;
+            --topbar-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            --glow-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.4), 0 0 20px rgba(37, 99, 235, 0.3);
             --transition-speed: 0.3s;
+            --transition-fluid: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --primary-hover: #60a5fa;
+            --primary-light: rgba(59, 130, 246, 0.15);
+            --primary-dark: #1d4ed8;
+
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --sidebar-bg: #1e293b;
+            --sidebar-hover: #334155;
+            --sidebar-text: #94a3b8;
+            --topbar-bg: #1e293b;
+            --border-color: #334155;
+            --card-bg: #1e293b;
+            --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.4);
+            --card-hover-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            --glow-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.5), 0 0 25px rgba(59, 130, 246, 0.4);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --sidebar-bg: #020617;
+            --sidebar-hover: #1e293b;
+            --topbar-bg: #1e293b;
+            --border-color: #334155;
+            --card-bg: #1e293b;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            --glow-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
-            color: #1e293b;
+            color: var(--text-color);
             min-height: 100vh;
             margin: 0;
             overflow-x: hidden;
@@ -49,10 +96,10 @@
             left: 0;
             top: 0;
             background: var(--sidebar-bg);
-            color: #f1f5f9;
+            color: var(--sidebar-text);
             padding: 30px 20px;
             z-index: 1000;
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
         }
@@ -61,7 +108,7 @@
             font-size: 22px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: #ffffff;
+            color: var(--text-color);
             margin-bottom: 35px;
             display: flex;
             align-items: center;
@@ -75,7 +122,7 @@
             border-radius: 10px;
             font-size: 16px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .menu-section {
@@ -116,27 +163,26 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #94a3b8;
+            color: var(--sidebar-text);
             text-decoration: none;
             padding: 12px 16px;
             border-radius: 12px;
             margin-bottom: 6px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: var(--transition-fluid);
         }
 
         .sidebar a:hover {
             background: var(--sidebar-hover);
-            color: #ffffff;
-            transform: translateX(8px) scale(1.02);
+            color: var(--primary-color);
+            transform: translateX(5px);
         }
 
         .sidebar a.active-menu {
-            background: var(--primary-gradient) !important;
-            color: #ffffff !important;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            background: var(--primary-light) !important;
+            color: var(--primary-color) !important;
+            font-weight: 700;
         }
 
         /* Content Container */
@@ -149,9 +195,9 @@
 
         /* Topbar styling */
         .topbar {
-            background: #ffffff;
+            background: var(--topbar-bg);
             padding: 20px 40px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -165,16 +211,21 @@
 
         /* Cards and Elements */
         .card {
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
-            background: #ffffff;
+            background: var(--card-bg);
             box-shadow: var(--card-shadow);
-            transition: all var(--transition-speed);
+            transition: var(--transition-fluid);
             overflow: hidden;
+            color: var(--text-color) !important;
+        }
+        
+        .card-body {
+            color: var(--text-color) !important;
         }
 
         .card-hover:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: var(--card-hover-shadow);
         }
 
@@ -183,25 +234,25 @@
             position: relative;
             padding: 24px;
             border-left: 6px solid transparent;
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 20px;
             box-shadow: var(--card-shadow);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: var(--transition-fluid);
+            border: 1px solid var(--border-color);
         }
         
         .stat-card-custom:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 30px -10px rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.15);
+            border-color: rgba(37, 99, 235, 0.2);
         }
 
-        .stat-card-primary { border-left-color: #6366f1; }
+        .stat-card-primary { border-left-color: var(--primary-color); }
         .stat-card-success { border-left-color: #10b981; }
         .stat-card-warning { border-left-color: #f59e0b; }
         .stat-card-danger { border-left-color: #ef4444; }
         .stat-card-info { border-left-color: #0ea5e9; }
-        .stat-card-purple { border-left-color: #a855f7; }
+        .stat-card-purple { border-left-color: #8b5cf6; }
 
         .stat-icon {
             width: 48px;
@@ -215,41 +266,49 @@
             margin-bottom: 15px;
         }
 
-        .bg-light-primary { background-color: rgba(99, 102, 241, 0.1); color: #6366f1; }
-        .bg-light-success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
-        .bg-light-warning { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-        .bg-light-danger { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
-        .bg-light-info { background-color: rgba(14, 165, 233, 0.1); color: #0ea5e9; }
-        .bg-light-purple { background-color: rgba(168, 85, 247, 0.1); color: #a855f7; }
+        .bg-light-primary { background-color: var(--primary-light); color: var(--primary-color); }
+        .bg-light-success { background-color: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .bg-light-warning { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .bg-light-danger { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .bg-light-info { background-color: rgba(14, 165, 233, 0.15); color: #0ea5e9; }
+        .bg-light-purple { background-color: rgba(168, 85, 247, 0.15); color: #a855f7; }
 
         /* Tables styling */
         .table-custom-wrapper {
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 16px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            overflow: hidden;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         .table-custom {
             margin-bottom: 0;
+            color: var(--text-color);
+            --bs-table-bg: transparent;
+            --bs-table-color: var(--text-color);
+            --bs-table-hover-bg: var(--sidebar-hover);
+            --bs-table-hover-color: var(--text-color);
+            --bs-table-striped-bg: transparent;
+            --bs-table-active-bg: var(--sidebar-hover);
         }
 
         .table-custom th {
-            background-color: #f8fafc;
-            color: #64748b;
+            background-color: var(--sidebar-hover);
+            color: var(--text-muted);
             font-weight: 600;
             text-transform: uppercase;
             font-size: 11px;
             letter-spacing: 0.5px;
             padding: 16px 24px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .table-custom td {
             padding: 18px 24px;
             vertical-align: middle;
-            color: #334155;
-            border-bottom: 1px solid #f1f5f9;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .table-custom tr:last-child td {
@@ -261,8 +320,14 @@
         }
 
         .table-custom tr:hover {
-            background-color: #f8fafc;
+            background-color: var(--sidebar-hover);
         }
+
+        /* Utility Overrides for Dark Mode */
+        .text-muted { color: var(--text-muted) !important; }
+        .text-secondary { color: var(--text-muted) !important; }
+        .bg-white { background-color: var(--card-bg) !important; }
+        .text-dark { color: var(--text-color) !important; }
 
         /* Buttons Styling */
         .btn {
@@ -270,21 +335,36 @@
             font-size: 14px;
             font-weight: 600;
             border-radius: 12px;
-            transition: all var(--transition-speed);
+            transition: var(--transition-fluid);
         }
 
         .btn-primary {
             background: var(--primary-gradient);
             border: none;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
             color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition-fluid);
+            z-index: -1;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-            background: var(--primary-gradient);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: var(--glow-shadow);
             color: white;
+        }
+        .btn-primary:hover::after {
+            opacity: 1;
         }
 
         .btn-success {
@@ -360,25 +440,30 @@
 
         /* Form Inputs */
         .form-control, .form-select {
-            border: 1.5px solid #e2e8f0;
+            border: 1.5px solid var(--border-color);
             border-radius: 12px;
             padding: 12px 16px;
             font-size: 14px;
             transition: all var(--transition-speed);
-            color: #334155;
-            background-color: #ffffff;
+            color: var(--text-color) !important;
+            background-color: var(--card-bg) !important;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted) !important;
+            opacity: 0.8;
         }
 
         .form-control:focus, .form-select:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--primary-light);
             outline: none;
         }
 
         .form-label {
             font-weight: 600;
             font-size: 13px;
-            color: #475569;
+            color: var(--text-color);
             margin-bottom: 8px;
         }
 
@@ -453,6 +538,28 @@
             margin-bottom: 0;
             font-weight: 400;
         }
+
+        /* Custom Alerts for Dark Mode */
+        .alert-custom {
+            border-radius: 16px;
+            border: 1px solid transparent;
+        }
+        .alert-success-custom {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #059669;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+        [data-theme="dark"] .alert-success-custom {
+            color: #34d399;
+        }
+        .alert-danger-custom {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #dc2626;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        [data-theme="dark"] .alert-danger-custom {
+            color: #f87171;
+        }
     </style>
 </head>
 <body>
@@ -461,34 +568,34 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="brand">
-            <span class="brand-icon">🎫</span> <span>E-Ticket Plus</span>
+            <span class="brand-icon"><i class="ph-bold ph-ticket"></i></span> <span>E-Ticket Plus</span>
         </div>
 
         <div class="menu-section">Administrator</div>
         
         <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active-menu' : '' }}">
-            <span>📊</span> Dashboard Admin
+            <span class="fs-5"><i class="ph-fill ph-chart-bar"></i></span> Dashboard Admin
         </a>
 
         <a href="/events" class="{{ request()->is('events') || request()->is('events/*/edit') || request()->is('events/create') ? 'active-menu' : '' }}">
-            <span>🎟</span> Kelola Event
+            <span class="fs-5"><i class="ph-fill ph-ticket"></i></span> Kelola Event
         </a>
         
         <a href="/tickets" class="{{ request()->is('tickets') && !request()->is('tickets/*') ? 'active-menu' : '' }}">
-            <span>📄</span> Semua Pembelian
+            <span class="fs-5"><i class="ph-fill ph-file-text"></i></span> Semua Pembelian
         </a>
         
         <a href="/refunds" class="{{ request()->is('refunds') ? 'active-menu' : '' }}">
-            <span>💰</span> Kelola Refund
+            <span class="fs-5"><i class="ph-fill ph-money"></i></span> Kelola Refund
         </a>
         
         <a href="/check-ticket" class="{{ request()->is('check-ticket') ? 'active-menu' : '' }}">
-            <span>✅</span> Validasi Tiket
+            <span class="fs-5"><i class="ph-fill ph-check-circle"></i></span> Validasi Tiket
         </a>
 
         <div class="menu-section mt-auto">Portal Utama</div>
-        <a href="/" class="text-white-50">
-            <span>🏠</span> Halaman Utama
+        <a href="/">
+            <span class="fs-5"><i class="ph-fill ph-house"></i></span> Halaman Utama
         </a>
     </div>
 
@@ -497,13 +604,16 @@
         <!-- Topbar -->
         <div class="topbar">
             <div>
-                <h5 class="mb-0 fw-bold">Selamat Datang, {{ Auth::user()->name }}! 👋</h5>
+                <h5 class="mb-0 fw-bold">Selamat Datang, {{ Auth::user()->name }}! <i class="ph-fill ph-hand-waving text-warning"></i></h5>
                 <small class="text-muted">Kelola pemesanan, validation dan monitoring tiket dengan mudah.</small>
             </div>
             
             <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-sm btn-outline-secondary border-0 d-flex align-items-center justify-content-center" id="theme-toggle" style="width: 36px; height: 36px; border-radius: 50%;">
+                    <i class="ph-bold ph-moon fs-5" id="theme-icon"></i>
+                </button>
                 <span class="fw-semibold text-secondary">
-                    👤 Portal {{ auth()->user()->role === 'admin' ? 'Administrator' : 'Customer' }}
+                    <i class="ph-fill ph-user"></i> Portal {{ auth()->user()->role === 'admin' ? 'Administrator' : 'Customer' }}
                 </span>
                 
                 <form action="{{ route('logout') }}" method="POST">
@@ -519,9 +629,9 @@
         <div class="main-content">
             <!-- Alert Messages -->
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert" style="border-radius: 16px; background-color: #d1fae5; color: #065f46;">
+                <div class="alert alert-custom alert-success-custom alert-dismissible fade show mb-4 shadow-sm" role="alert">
                     <div class="d-flex align-items-center gap-2">
-                        <span>✨</span>
+                        <i class="ph-fill ph-sparkle fs-5"></i>
                         <div><strong>Berhasil!</strong> {{ session('success') }}</div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -529,9 +639,9 @@
             @endif
 
             @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm mb-4" role="alert" style="border-radius: 16px; background-color: #fee2e2; color: #991b1b;">
+                <div class="alert alert-custom alert-danger-custom alert-dismissible fade show mb-4 shadow-sm" role="alert">
                     <div class="d-flex align-items-center gap-2">
-                        <span>⚠️</span>
+                        <i class="ph-fill ph-warning fs-5"></i>
                         <div><strong>Error!</strong> {{ session('error') }}</div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -552,5 +662,37 @@
 
 <!-- Bootstrap JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Theme Toggle Script -->
+<script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    // Cek preferensi tema sebelumnya
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if(themeIcon) updateIcon(currentTheme);
+
+    if(themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    }
+
+    function updateIcon(theme) {
+        if (theme === 'dark') {
+            themeIcon.classList.remove('ph-moon');
+            themeIcon.classList.add('ph-sun');
+        } else {
+            themeIcon.classList.remove('ph-sun');
+            themeIcon.classList.add('ph-moon');
+        }
+    }
+</script>
 </body>
 </html>

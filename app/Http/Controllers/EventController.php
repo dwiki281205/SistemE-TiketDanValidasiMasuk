@@ -9,9 +9,23 @@ use Illuminate\Support\Facades\Storage;
 class EventController extends Controller
 {
 
-public function index()
+public function index(Request $request)
 {
-    $events = EticketEvent::all();
+    $query = EticketEvent::query();
+
+    if ($request->filled('title')) {
+        $query->where('title', 'like', '%' . $request->title . '%');
+    }
+
+    if ($request->filled('venue')) {
+        $query->where('venue', 'like', '%' . $request->venue . '%');
+    }
+
+    if ($request->filled('category')) {
+        $query->where('category', $request->category);
+    }
+
+    $events = $query->get();
     return view('events.index', compact('events'));
 }
 
@@ -30,6 +44,7 @@ public function store(Request $request)
 
     EticketEvent::create([
         'title' => $request->title,
+        'category' => $request->category,
         'venue' => $request->venue,
         'event_date' => $request->event_date,
         'total_seats' => $request->total_seats,
@@ -65,6 +80,7 @@ public function update(Request $request, $id)
 
    $event->update([
     'title' => $request->title,
+    'category' => $request->category,
     'venue' => $request->venue,
     'event_date' => $request->event_date,
     'total_seats' => $request->total_seats,

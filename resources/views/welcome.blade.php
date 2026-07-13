@@ -30,6 +30,21 @@
         margin-bottom: 20px;
     }
 
+    @keyframes float-ticket {
+        0% { transform: translateY(0px) rotate(-10deg); filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); }
+        50% { transform: translateY(-25px) rotate(-5deg); filter: drop-shadow(0 25px 35px rgba(0,0,0,0.3)); }
+        100% { transform: translateY(0px) rotate(-10deg); filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2)); }
+    }
+
+    .hero-ticket-icon {
+        font-size: 240px;
+        color: #ffffff;
+        animation: float-ticket 6s ease-in-out infinite;
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+    }
+
     .hero-subtitle {
         font-size: 18px;
         opacity: 0.9;
@@ -39,15 +54,15 @@
 
     /* Search Box Mockup */
     .search-container {
-        background-color: #ffffff;
+        background-color: var(--card-bg);
         border-radius: 18px;
         padding: 24px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--card-shadow);
         color: var(--text-dark);
         margin-top: -40px;
         position: relative;
         z-index: 10;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--border-color);
     }
 
     .search-label {
@@ -60,7 +75,7 @@
     }
 
     .search-input-group {
-        border-right: 1px solid #e2e8f0;
+        border-right: 1px solid var(--border-color);
     }
 
     .search-input-group:last-child {
@@ -73,18 +88,23 @@
     }
 
     .feature-card {
-        background-color: #ffffff;
-        border: 1px solid #f1f5f9;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
         border-radius: 20px;
-        padding: 30px;
+        padding: 40px 30px;
         box-shadow: var(--card-shadow);
-        transition: all 0.3s;
+        transition: var(--transition-fluid);
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--glow-shadow);
+        border-color: rgba(37, 99, 235, 0.3);
     }
 
     .feature-icon {
@@ -112,31 +132,33 @@
     }
 
     .event-card {
-        background: #ffffff;
+        background: var(--card-bg);
         border-radius: 20px;
         overflow: hidden;
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        border: 1px solid var(--border-color);
         box-shadow: var(--card-shadow);
-        transition: all 0.3s;
+        transition: var(--transition-fluid);
         height: 100%;
         display: flex;
         flex-direction: column;
     }
 
     .event-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--glow-shadow);
+        border-color: rgba(37, 99, 235, 0.3);
     }
 
     /* CTA Section */
     .cta-section {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
         color: white;
         border-radius: 30px;
-        padding: 60px;
+        padding: 60px 40px;
         margin-bottom: 100px;
         position: relative;
         overflow: hidden;
+        box-shadow: var(--glow-shadow);
     }
 
     .cta-section::before {
@@ -159,12 +181,9 @@
                 <p class="hero-subtitle">Beli tiket konser musik, festival, seminar, dan workshop favoritmu secara instan, aman, dan tanpa repot.</p>
                 <a href="/events" class="btn-primary-custom px-4 py-3 fs-6">Jelajahi Event Sekarang</a>
             </div>
-            <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
-                <div class="bg-white bg-opacity-10 p-3 rounded-4 border border-white border-opacity-20 shadow">
-                    <div style="height: 250px; background-color: rgba(255, 255, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
-                        <span class="fs-1">🎟️✨</span>
-                    </div>
-                </div>
+            <div class="col-lg-5 offset-lg-1 d-none d-lg-block text-center position-relative">
+                <div class="position-absolute" style="width: 250px; height: 250px; background: rgba(255, 255, 255, 0.15); filter: blur(60px); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;"></div>
+                <i class="ph-fill ph-ticket hero-ticket-icon"></i>
             </div>
         </div>
     </div>
@@ -173,37 +192,43 @@
 <!-- Search Panel (Traveloka/tiket.com style Mockup) -->
 <div class="container">
     <div class="search-container">
-        <div class="row g-3 align-items-center">
-            <div class="col-md-4 search-input-group">
-                <div class="search-label">Cari Event</div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="fs-5 text-secondary">🔍</span>
-                    <input type="text" class="form-control border-0 bg-transparent p-0 fs-6 shadow-none" placeholder="Masukkan nama konser/seminar...">
+        <form action="/events" method="GET">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-4 search-input-group">
+                    <div class="search-label">Cari Event</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5 text-secondary"><i class="ph-bold ph-magnifying-glass"></i></span>
+                        <input type="text" name="title" class="form-control border-0 bg-transparent p-0 fs-6 shadow-none" placeholder="Masukkan nama konser/seminar..." style="color: var(--text-dark);">
+                    </div>
+                </div>
+                <div class="col-md-3 search-input-group">
+                    <div class="search-label">Lokasi / Venue</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5 text-secondary"><i class="ph-bold ph-map-pin"></i></span>
+                        <input type="text" name="venue" class="form-control border-0 bg-transparent p-0 fs-6 shadow-none" placeholder="Jakarta, Bandung, Bali..." style="color: var(--text-dark);">
+                    </div>
+                </div>
+                <div class="col-md-3 search-input-group">
+                    <div class="search-label">Kategori</div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5 text-secondary"><i class="ph-bold ph-tag"></i></span>
+                        <select name="category" class="form-select border-0 bg-transparent p-0 fs-6 shadow-none" style="cursor: pointer; color: var(--text-dark);">
+                            <option value="">Semua Kategori</option>
+                            @if(isset($categories))
+                                @foreach($categories as $cat)
+                                    @if(!empty($cat))
+                                        <option value="{{ $cat }}">{{ $cat }}</option>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center text-md-end">
+                    <button type="submit" class="btn-primary-custom w-100 py-3 text-center border-0">Cari Tiket</button>
                 </div>
             </div>
-            <div class="col-md-3 search-input-group">
-                <div class="search-label">Lokasi / Venue</div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="fs-5 text-secondary">📍</span>
-                    <input type="text" class="form-control border-0 bg-transparent p-0 fs-6 shadow-none" placeholder="Jakarta, Bandung, Bali...">
-                </div>
-            </div>
-            <div class="col-md-3 search-input-group">
-                <div class="search-label">Kategori</div>
-                <div class="d-flex align-items-center gap-2">
-                    <span class="fs-5 text-secondary">🏷️</span>
-                    <select class="form-select border-0 bg-transparent p-0 fs-6 shadow-none" style="cursor: pointer;">
-                        <option value="">Semua Kategori</option>
-                        <option value="music">Konser Musik</option>
-                        <option value="seminar">Seminar / Edukasi</option>
-                        <option value="art">Seni & Kreatif</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-2 text-center text-md-end">
-                <a href="/events" class="btn-primary-custom w-100 py-3 text-center">Cari Tiket</a>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -217,26 +242,26 @@
             </div>
         </div>
         
-        <div class="row g-4">
-            <div class="col-md-4">
+        <div class="row g-4 justify-content-center mt-3">
+            <div class="col-lg-4 col-md-6">
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h5 class="fw-bold text-dark">Instant E-Ticket</h5>
-                    <p class="text-muted mb-0">E-Ticket diterbitkan beserta QR Code unik secara langsung sesaat setelah Anda menyelesaikan checkout.</p>
+                    <div class="feature-icon"><i class="ph-fill ph-lightning"></i></div>
+                    <h5 class="fw-bold" style="color: var(--text-dark);">Instant E-Ticket</h5>
+                    <p class="mb-0" style="color: var(--text-muted); font-size: 14.5px;">E-Ticket diterbitkan beserta QR Code unik secara langsung sesaat setelah Anda menyelesaikan checkout.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h5 class="fw-bold text-dark">Pembayaran Aman</h5>
-                    <p class="text-muted mb-0">Verifikasi status pembayaran secara terpusat untuk menjamin keaslian tiket masuk di lokasi event.</p>
+                    <div class="feature-icon"><i class="ph-fill ph-lock-key"></i></div>
+                    <h5 class="fw-bold" style="color: var(--text-dark);">Pembayaran Aman</h5>
+                    <p class="mb-0" style="color: var(--text-muted); font-size: 14.5px;">Verifikasi status pembayaran secara terpusat untuk menjamin keaslian tiket masuk di lokasi event.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6">
                 <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h5 class="fw-bold text-dark">Kemudahan Refund</h5>
-                    <p class="text-muted mb-0">Rencana berubah? Ajukan refund tiket dengan mudah melalui portal akun dan pantau status permohonan Anda.</p>
+                    <div class="feature-icon"><i class="ph-fill ph-money"></i></div>
+                    <h5 class="fw-bold" style="color: var(--text-dark);">Kemudahan Refund</h5>
+                    <p class="mb-0" style="color: var(--text-muted); font-size: 14.5px;">Rencana berubah? Ajukan refund tiket dengan mudah melalui portal akun dan pantau status permohonan Anda.</p>
                 </div>
             </div>
         </div>
@@ -244,22 +269,22 @@
 </div>
 
 <!-- Event Showcase Section -->
-<div class="showcase-section bg-white border-top border-bottom py-5">
+<div class="showcase-section border-top border-bottom py-5" style="background-color: var(--bg-color); border-color: var(--border-color) !important;">
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
-                <h2 class="showcase-title">🔥 Event Terpopuler Minggu Ini</h2>
-                <p class="text-muted mb-0">Segera pesan tiket Anda sebelum kehabisan kursi!</p>
+                <h2 class="showcase-title"><i class="ph-fill ph-fire text-danger"></i> Event Terpopuler Minggu Ini</h2>
+                <p class="mb-0" style="color: var(--text-muted);">Segera pesan tiket Anda sebelum kehabisan kursi!</p>
             </div>
             <a href="/events" class="text-decoration-none fw-bold text-primary">Lihat Semua Event →</a>
         </div>
 
         @if($events->isEmpty())
-            <div class="card p-5 text-center border-0 shadow-sm bg-light">
+            <div class="card p-5 text-center border-0 shadow-sm" style="background-color: var(--card-bg);">
                 <div class="card-body empty-state py-4">
-                    <div class="empty-state-icon">🎟️</div>
-                    <h5 class="fw-bold text-dark">Belum Ada Event Tersedia</h5>
-                    <p class="text-muted">Silakan kembali lagi nanti untuk melihat daftar event terbaru kami.</p>
+                    <div class="empty-state-icon text-primary"><i class="ph-fill ph-ticket"></i></div>
+                    <h5 class="fw-bold" style="color: var(--text-dark);">Belum Ada Event Tersedia</h5>
+                    <p style="color: var(--text-muted);">Silakan kembali lagi nanti untuk melihat daftar event terbaru kami.</p>
                 </div>
             </div>
         @else
@@ -277,7 +302,7 @@
                                     >
                                 @else
                                     <div class="bg-primary text-white d-flex flex-column align-items-center justify-content-center" style="height: 200px;">
-                                        <span class="fs-1">🎫</span>
+                                        <span class="fs-1"><i class="ph-fill ph-ticket"></i></span>
                                         <span class="fw-bold mt-2">E-Ticket Plus</span>
                                     </div>
                                 @endif
@@ -287,19 +312,22 @@
                             </div>
 
                             <div class="card-body d-flex flex-column p-4">
-                                <h5 class="fw-bold text-dark mb-2">{{ $event->title }}</h5>
-                                <div class="text-muted small mb-3 d-flex align-items-center gap-1">
-                                    <span>📍</span> <span>{{ $event->venue }}</span>
+                                <h5 class="fw-bold mb-2" style="color: var(--text-dark);">{{ $event->title }}</h5>
+                                <div class="small mb-3 d-flex align-items-center gap-2" style="color: var(--text-muted);">
+                                    <i class="ph-fill ph-map-pin fs-6"></i> <span>{{ $event->venue }}</span>
                                 </div>
-                                <div class="text-muted small mb-3 d-flex align-items-center gap-1">
-                                    <span>📅</span> <span>{{ date('d M Y', strtotime($event->event_date)) }}</span>
+                                <div class="small mb-3 d-flex align-items-center gap-2" style="color: var(--text-muted);">
+                                    <i class="ph-fill ph-calendar-blank fs-6"></i> <span>{{ date('d M Y', strtotime($event->event_date)) }}</span>
                                 </div>
-                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                                <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-color) !important;">
                                     <div>
-                                        <span class="text-muted small d-block">Mulai Dari</span>
+                                        <span class="small d-block" style="color: var(--text-muted);">Mulai Dari</span>
                                         <span class="text-success fw-bold">Rp {{ number_format($event->regular_price, 0, ',', '.') }}</span>
                                     </div>
-                                    <a href="/events/{{ $event->id }}/buy" class="btn-primary-custom py-2 px-3">Beli Tiket</a>
+                                    <div class="d-flex gap-2">
+                                        <a href="/events/{{ $event->id }}" class="btn-secondary-custom py-2 px-3">Detail</a>
+                                        <a href="/events/{{ $event->id }}/buy" class="btn-primary-custom py-2 px-3">Beli Tiket</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
