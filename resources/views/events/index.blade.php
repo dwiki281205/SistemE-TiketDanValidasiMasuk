@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="mb-2 d-flex align-items-center gap-2" style="color: var(--text-muted); font-size: 13.5px;">
-                            <i class="ph-fill ph-clock fs-6"></i> <span>{{ $event->event_time ?? '08:00 WIB' }}</span>
+                            <i class="ph-fill ph-clock fs-6"></i> <span>{{ $event->event_time ? date('H:i', strtotime($event->event_time)) . ' WIB' : '08:00 WIB' }}</span>
                         </div>
 
                         <div class="mb-3 d-flex align-items-center gap-2" style="color: var(--text-muted); font-size: 13.5px;">

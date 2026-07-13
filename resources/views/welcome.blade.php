@@ -324,7 +324,7 @@
                                         <i class="ph-fill ph-calendar-blank fs-6"></i> <span>{{ date('d M Y', strtotime($event->event_date)) }}</span>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
-                                        <i class="ph-fill ph-clock fs-6"></i> <span>{{ $event->event_time ?? '08:00 WIB' }}</span>
+                                        <i class="ph-fill ph-clock fs-6"></i> <span>{{ $event->event_time ? date('H:i', strtotime($event->event_time)) . ' WIB' : '08:00 WIB' }}</span>
                                     </div>
                                 </div>
                                 <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-color) !important;">

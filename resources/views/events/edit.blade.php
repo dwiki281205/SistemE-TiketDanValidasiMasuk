@@ -31,13 +31,17 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="venue" class="form-label">Lokasi / Venue</label>
                     <input type="text" name="venue" id="venue" class="form-control" value="{{ $event->venue }}" required>
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="event_date" class="form-label">Tanggal Event</label>
                     <input type="date" name="event_date" id="event_date" class="form-control" value="{{ $event->event_date }}" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="event_time" class="form-label">Waktu Event</label>
+                    <input type="time" name="event_time" id="event_time" class="form-control" value="{{ $event->event_time ? date('H:i', strtotime($event->event_time)) : '' }}" required>
                 </div>
             </div>
 

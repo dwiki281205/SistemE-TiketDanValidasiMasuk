@@ -47,6 +47,7 @@ public function store(Request $request)
         'category' => $request->category,
         'venue' => $request->venue,
         'event_date' => $request->event_date,
+        'event_time' => $request->event_time,
         'total_seats' => $request->total_seats,
         'vip_price' => $request->vip_price,
         'regular_price' => $request->regular_price,
@@ -83,6 +84,7 @@ public function update(Request $request, $id)
     'category' => $request->category,
     'venue' => $request->venue,
     'event_date' => $request->event_date,
+    'event_time' => $request->event_time,
     'total_seats' => $request->total_seats,
 
     'price' => $request->regular_price,
