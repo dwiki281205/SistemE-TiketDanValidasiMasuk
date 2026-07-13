@@ -18,7 +18,7 @@
             </div>
             
             <div class="card-body p-4">
-                <form action="/tickets" method="POST">
+                <form action="/tickets" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="event_id" value="{{ $event->id }}">
 
@@ -48,6 +48,18 @@
                                 VIP - Rp {{ number_format($event->vip_price, 0, ',', '.') }}
                             </option>
                         </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label d-block fw-bold">Metode Pembayaran (QRIS)</label>
+                        <div class="text-center p-3 border rounded-3 mb-3" style="background-color: var(--card-bg);">
+                            <img src="{{ asset('images/qris.png') }}" alt="QRIS Payment" class="img-fluid rounded shadow-sm" style="max-height: 250px;">
+                            <p class="mt-2 mb-0 small text-muted">Scan QRIS di atas untuk melakukan pembayaran tiket Anda.</p>
+                        </div>
+                        
+                        <label for="payment_proof" class="form-label">Unggah Bukti Pembayaran <span class="text-danger">*</span></label>
+                        <input type="file" name="payment_proof" id="payment_proof" class="form-control" accept="image/*" required>
+                        <div class="form-text text-muted">Format: JPG, PNG. Maksimal 2MB.</div>
                     </div>
 
                     <hr class="my-4">

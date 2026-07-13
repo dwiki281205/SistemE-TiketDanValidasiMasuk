@@ -110,6 +110,26 @@
 </div>
 
 <!-- Refund Status Banner Notifications -->
+@if($ticket->payment_status == 'pending')
+    <div class="alert alert-info border-0 shadow-sm max-w-2xl mx-auto mb-4" role="alert" style="border-radius: 16px; max-width: 600px; background-color: #e0f2fe; color: #075985;">
+        <div class="d-flex align-items-center gap-2">
+            <span class="fs-4">⏳</span>
+            <div>
+                <strong>Menunggu Konfirmasi:</strong> Pembayaran Anda sedang diverifikasi oleh admin. Tiket belum aktif.
+            </div>
+        </div>
+    </div>
+@elseif($ticket->payment_status == 'paid' && $ticket->refund_status == 'none')
+    <div class="alert alert-success border-0 shadow-sm max-w-2xl mx-auto mb-4" role="alert" style="border-radius: 16px; max-width: 600px; background-color: #dcfce7; color: #166534;">
+        <div class="d-flex align-items-center gap-2">
+            <span class="fs-4">✅</span>
+            <div>
+                <strong>Pembayaran Berhasil!</strong> Tiket Anda sudah aktif dan siap digunakan.
+            </div>
+        </div>
+    </div>
+@endif
+
 @if($ticket->refund_status == 'pending')
     <div class="alert alert-warning border-0 shadow-sm max-w-2xl mx-auto mb-4" role="alert" style="border-radius: 16px; max-width: 600px; background-color: #fef3c7; color: #92400e;">
         <div class="d-flex align-items-center gap-2">
@@ -193,6 +213,8 @@
                     <span class="badge status-pending fw-bold">REFUND PENDING</span>
                 @elseif($ticket->refund_status == 'rejected')
                     <span class="badge status-rejected fw-bold">REFUND REJECTED</span>
+                @elseif($ticket->payment_status == 'pending')
+                    <span class="badge status-pending fw-bold">MENUNGGU PEMBAYARAN</span>
                 @else
                     <span class="badge status-approved fw-bold">PAID</span>
                 @endif
@@ -209,6 +231,14 @@
                 <!-- Watermark for checked-in ticket -->
                 <div class="watermark-used">
                     Checked In / Used
+                </div>
+            @elseif($ticket->payment_status == 'pending')
+                <!-- Watermark for pending payment -->
+                <div class="watermark-used" style="border-color: #eab308; color: #eab308; background: rgba(234, 179, 8, 0.05);">
+                    Pending Payment
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">QR Code akan muncul setelah admin mengkonfirmasi pembayaran Anda.</small>
                 </div>
             @else
                 <!-- Render QR Code -->

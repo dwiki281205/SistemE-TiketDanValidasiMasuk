@@ -584,6 +584,10 @@
         <a href="/tickets" class="{{ request()->is('tickets') && !request()->is('tickets/*') ? 'active-menu' : '' }}">
             <span class="fs-5"><i class="ph-fill ph-file-text"></i></span> Semua Pembelian
         </a>
+
+        <a href="/payments" class="{{ request()->is('payments') ? 'active-menu' : '' }}">
+            <span class="fs-5"><i class="ph-fill ph-wallet"></i></span> Konfirmasi Pembayaran
+        </a>
         
         <a href="/refunds" class="{{ request()->is('refunds') ? 'active-menu' : '' }}">
             <span class="fs-5"><i class="ph-fill ph-money"></i></span> Kelola Refund

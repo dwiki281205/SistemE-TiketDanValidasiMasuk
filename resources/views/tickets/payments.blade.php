@@ -1,20 +1,20 @@
-@extends(auth()->check() && auth()->user()->role === 'admin' ? 'layouts.app' : 'layouts.main')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h2 class="fw-bold mb-1 text-dark"><i class="ph-bold ph-file-text text-primary"></i> Riwayat Pembelian Tiket</h2>
-        <p class="text-muted mb-0">Daftar lengkap transaksi pembelian tiket seluruh event.</p>
+        <h2 class="fw-bold mb-1 text-dark"><i class="ph-bold ph-wallet text-primary"></i> Konfirmasi Pembayaran</h2>
+        <p class="text-muted mb-0">Daftar transaksi tiket yang menunggu konfirmasi pembayaran dari admin.</p>
     </div>
 </div>
 
 @if($tickets->isEmpty())
     <div class="card p-5 text-center border-0 shadow-sm" style="background-color: var(--card-bg);">
         <div class="card-body empty-state">
-            <div class="empty-state-icon text-primary"><i class="ph-fill ph-file-text" style="font-size: 48px;"></i></div>
-            <h5 class="fw-bold text-dark mt-3">Belum Ada Pembelian Tiket</h5>
-            <p class="text-muted">Semua tiket yang dibeli oleh pelanggan akan muncul di sini.</p>
+            <div class="empty-state-icon text-success"><i class="ph-fill ph-check-circle" style="font-size: 48px;"></i></div>
+            <h5 class="fw-bold text-dark mt-3">Tidak Ada Pembayaran Tertunda</h5>
+            <p class="text-muted">Semua pembayaran tiket telah dikonfirmasi atau belum ada pesanan baru.</p>
         </div>
     </div>
 @else
@@ -27,8 +27,8 @@
                     <th>Email</th>
                     <th>Nama Event</th>
                     <th>Kategori</th>
-                    <th>Status Check-In</th>
-                    <th>Status Tiket</th>
+                    <th>Total Bayar</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -54,31 +54,29 @@
                                 <span class="badge bg-primary text-white fw-bold" style="font-size: 11px;"><i class="ph-fill ph-ticket"></i> Regular</span>
                             @endif
                         </td>
-                        <td>
-                            @if($ticket->is_used)
-                                <span class="badge-pill-custom status-rejected">Sudah Digunakan</span>
+                        <td class="fw-bold text-success">
+                            @if($ticket->ticket_type == 'VIP')
+                                Rp {{ number_format($ticket->event->vip_price, 0, ',', '.') }}
                             @else
-                                <span class="badge-pill-custom status-approved">Belum Digunakan</span>
+                                Rp {{ number_format($ticket->event->regular_price, 0, ',', '.') }}
                             @endif
                         </td>
                         <td>
-                            @if($ticket->refund_status == 'approved')
-                                <span class="badge-pill-custom status-refunded">Refunded</span>
-                            @elseif($ticket->refund_status == 'pending')
-                                <span class="badge-pill-custom status-pending">Refund Pending</span>
-                            @elseif($ticket->refund_status == 'rejected')
-                                <span class="badge-pill-custom status-rejected">Refund Rejected</span>
-                            @elseif($ticket->payment_status == 'pending')
-                                <span class="badge-pill-custom status-pending">Menunggu Pembayaran</span>
-                            @else
-                                <span class="badge-pill-custom status-approved">Active / Paid</span>
-                            @endif
+                            <span class="badge-pill-custom status-pending">Menunggu Konfirmasi</span>
                         </td>
                         <td>
                             <div class="d-flex flex-wrap gap-1">
-                                <a href="/tickets/{{ $ticket->id }}" class="btn btn-secondary btn-sm rounded-pill px-3">
-                                    Detail
-                                </a>
+                                <form action="/tickets/{{ $ticket->id }}/confirm-payment" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin telah menerima pembayaran untuk tiket ini?')">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm rounded-pill px-3">
+                                        Konfirmasi
+                                    </button>
+                                </form>
+                                @if($ticket->payment_proof)
+                                    <a href="{{ asset('storage/'.$ticket->payment_proof) }}" target="_blank" class="btn btn-info btn-sm rounded-pill px-3 text-white">Lihat Bukti</a>
+                                @else
+                                    <span class="text-muted small">Tidak ada bukti</span>
+                                @endif
                             </div>
                         </td>
                     </tr>

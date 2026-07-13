@@ -77,6 +77,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/check-ticket', [TicketController::class, 'checkForm'])->name('tickets.checkForm');
     Route::post('/check-ticket', [TicketController::class, 'check'])->name('tickets.check');
 
+    // Confirm Payment
+    Route::get('/payments', [TicketController::class, 'payments'])->name('payments.index');
+    Route::post('/tickets/{id}/confirm-payment', [TicketController::class, 'confirmPayment']);
+
 });
 
 require __DIR__.'/auth.php';

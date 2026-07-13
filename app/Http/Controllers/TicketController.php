@@ -25,6 +25,11 @@ public function store(Request $request)
 
     $qr = QrCode::size(200)->generate($ticketCode);
 
+    $paymentProofPath = null;
+    if ($request->hasFile('payment_proof')) {
+        $paymentProofPath = $request->file('payment_proof')->store('payments', 'public');
+    }
+
     $ticket = Ticket::create([
         'user_id' => auth()->check() ? auth()->id() : null,
         'event_id' => $request->event_id,
@@ -33,7 +38,10 @@ public function store(Request $request)
         'email' => $request->email,
         'phone' => $request->phone,
         'ticket_code' => $ticketCode,
-        'qr_code_data' => $qr
+        'qr_code_data' => $qr,
+        'payment_method' => 'QRIS',
+        'payment_status' => 'pending',
+        'payment_proof' => $paymentProofPath
     ]);
 
     return redirect('/tickets/' . $ticket->id);
@@ -70,6 +78,26 @@ public function check(Request $request)
     ]);
 
     return back()->with('success', 'Tiket valid! Silakan masuk');
+}
+
+public function confirmPayment($id)
+{
+    $ticket = Ticket::findOrFail($id);
+    
+    $ticket->payment_status = 'paid';
+    $ticket->save();
+
+    return back()->with('success', 'Pembayaran tiket berhasil dikonfirmasi.');
+}
+
+public function payments()
+{
+    $tickets = Ticket::with('event')
+        ->where('payment_status', 'pending')
+        ->latest()
+        ->get();
+
+    return view('tickets.payments', compact('tickets'));
 }
 
 public function index()
